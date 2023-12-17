@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Weather project</title>
+    <meta property="og:title" content="Wooden Our Frog"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <meta property="twitter:card" content="summary_large_image"/>
+
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap"
+            data-tag="font"
+    />
+    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="regForm.css">
+    <link href="./home.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="registration-form-container">
+    <div id="registration-form-overlay"></div>
+    <div id="registration-form">
+        <form id="loginForm">
+            <div class="field">
+                <input id="login" type="text" name="username" class="input" placeholder=" "/>
+                <label for="login" class="label">login</label>
+            </div>
+            <div class="field">
+                <input id="password" type="text" name="password" class="input" placeholder=" "/>
+                <label for="password" class="label">password</label>
+            </div>
+            <div>
+                <button type="submit" class="reg-button" id="submitButton">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div class="main-container">
+        <div class="search-container">
+            <label class="home-text">
+                Search
+            </label>
+            <input
+                    type="text"
+                    placeholder="Minsk"
+                    class="home-textinput"
+                    id="searchBar"
+            />
+        </div>
+        <div class="navigation-container">
+            <button class="home-button" onclick="update()">
+                Update
+            </button>
+            <button class="home-button" id="loginButton">
+                Login
+            </button>
+            <div class="switch-container">
+                <label class="switch-label">Metric system</label>
+
+                <label class="switch">
+                    <input type="checkbox" id="unitsToggle" onclick="updateOnUnitsChange()">
+                    <span class="slider round"></span>
+                </label>
+
+                <label class="switch-label">Imperial units</label>
+            </div>
+        </div>
+        <div class="main-forecast-container">
+            <div onclick="update()" class="home-current-weather-cont">
+                <div class="home-container05">
+                    <label id="today" class="home-text09">Now</label>
+                </div>
+                <div class="home-container06">
+                    <div class="home-container07">
+                        <label id="todayTemp" class="main-temp"></label>
+                        <label id="todayClouds"></label>
+                        <label id="todayHum"></label>
+                        <label id="todayWindSpeed"></label>
+                        <label id="todayWindDir"></label>
+                    </div>
+                    <img
+                            id="todayImg"
+                            alt="image"
+                            src="https://play.teleporthq.io/static/svg/default-img.svg"
+                            class="home-image"
+                    />
+                </div>
+            </div>
+            <div onclick="getForecast(1)" class="home-container-forecast">
+                <div class="home-container09">
+                    <label id="tomorrow" class="home-text16">Tomorrow</label>
+                </div>
+                <img
+                        id="tomorrowImg"
+                        alt="image"
+                        class="home-image"
+                />
+                <label id="tomorrowTemp" class="home-text16"></label>
+            </div>
+            <div onclick="getForecast(2)" class="home-container-forecast">
+                <div class="home-container09">
+                    <label id="2day" class="home-text16"></label>
+                </div>
+                <img
+                        id="2dayImg"
+                        alt="image"
+                        class="home-image"
+                />
+                <label id="2dayTemp" class="home-text16"></label>
+            </div>
+            <div onclick="getForecast(3)" class="home-container-forecast">
+                <div class="home-container09">
+                    <label id="3day" class="home-text16"></label>
+                </div>
+                <img
+                        id="3dayImg"
+                        alt="image"
+                        class="home-image"
+                />
+                <label id="3dayTemp" class="home-text16"></label>
+            </div>
+            <div onclick="getForecast(4)" class="home-container-forecast">
+                <div class="home-container09">
+                    <label id="4day" class="home-text16"></label>
+                </div>
+                <img
+                        id="4dayImg"
+                        alt="image"
+                        class="home-image"
+                />
+                <label id="4dayTemp" class="home-text16"></label>
+            </div>
+        </div>
+        <div id="hourlyForecastContainer" class="home-container25"></div>
+    </div>
+</div>
+<script src="regForm.js"></script>
+<script src="Show.js"></script>
+</body>
+</html>

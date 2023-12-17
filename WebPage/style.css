@@ -1,0 +1,41 @@
+:root {
+    --dl-color-gray-500: #595959;
+    --dl-color-gray-700: #999999;
+    --dl-color-gray-900: #D9D9D9;
+    --dl-color-danger-300: #A22020;
+    --dl-color-danger-500: #BF2626;
+    --dl-color-danger-700: #E14747;
+    --dl-color-gray-black: #000000;
+    --dl-color-gray-white: #FFFFFF;
+    --dl-color-primary-100: #003EB3;
+    --dl-color-primary-300: #0074F0;
+    --dl-color-primary-500: #14A9FF;
+    --dl-color-primary-700: #85DCFF;
+    --dl-color-success-300: #199033;
+    --dl-color-success-500: #32A94C;
+    --dl-color-success-700: #4CC366;
+    --dl-radius-radius-round: 50%;
+    --dl-color-gray-background: #100f14ff;
+    --text-color: #FFFFFF;
+}
+
+
+html {
+    font-family: Open Sans;
+    font-size: 1vw;
+}
+
+body {
+    font-weight: 600;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: 1.15;
+    background-color: var(--dl-color-gray-background);
+}
+
+.switch-label {
+    color: rgb(69, 68, 74);
+    font: inherit;
+}

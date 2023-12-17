@@ -1,0 +1,253 @@
+.main-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1vw;
+    padding: 1vw 2vw 0vw 2vw;
+}
+
+/*Heager*/
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    gap: 1vw;
+}
+
+.home-text {
+    color: rgb(255, 255, 255);
+}
+
+.home-textinput {
+    padding: 0.5rem 1rem;
+    border-style: hidden;
+    border-radius: 50px;
+    background-color: #1e1e1e;
+    color: var(--text-color);
+    font-size: 1vw;
+}
+
+/*Nav buttons*/
+.navigation-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1vw;
+}
+
+.home-button {
+    color: rgb(69, 68, 74);
+    border-style: hidden;
+    background-color: transparent;
+    font: inherit;
+}
+
+.switch-container {
+    display: flex;
+    gap: 1vw;
+    border-style: solid;
+    border-color: rgb(69, 68, 74);
+    border-radius: 2.5em;
+    padding: .2svw;
+    align-items: center;
+}
+
+/*Main part*/
+.main-forecast-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1vw;
+}
+
+.home-current-weather-cont {
+    display: flex;
+    flex-direction: column;
+    border-style: hidden;
+    border-radius: 2.5em;
+    width: 18vw;
+    height: 12vw;
+    padding: 0.5vw;
+    background-color: #c2d7ec;
+}
+
+.home-container05 {
+    display: flex;
+    border-color: var(--dl-color-gray-black);
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    justify-content: flex-start;
+    height: 10%;
+}
+
+.home-container06 {
+    display: flex;
+    border-style: hidden;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.home-container07 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1vw;
+    gap: .5vw;
+}
+
+.home-image {
+    height: 80%;
+    object-fit: contain;
+}
+.home-image01 {
+    object-fit: contain;
+    height: 6.2em;
+}
+
+.home-container-forecast {
+    display: flex;
+    flex-direction: column;
+    border-style: hidden;
+    border-radius: 2.5em;
+    width: 9vw;
+    height: 12vw;
+    background-color: #1b1b1d;
+    padding: 0.5vw;
+}
+
+.home-container09 {
+    display: flex;
+    height: 10%;
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: var(--dl-color-gray-black);
+    transition: ease-out .4s;
+}
+
+.home-container-forecast.active .home-container09 {
+    border-color: #c2d7ec;
+}
+
+.home-text16 {
+    color: var(--dl-color-gray-white);
+    margin-left: 1em;
+}
+
+.home-text09 {
+    margin-left: 1em;
+}
+
+.main-temp {
+    font-size: 1.5em;
+}
+
+/*Hourly forecast*/
+.home-container25 {
+    display: flex;
+    align-items: center;
+    border-style: hidden;
+    border-radius: 2.5em;
+    height: 12vw;
+    justify-content: center;
+    background-color: #c2d7ec;
+}
+
+.home-container26 {
+    display: flex;
+    align-items: center;
+    border-color: var(--dl-color-gray-black);
+    border-style: dashed;
+    flex-direction: column;
+    justify-content: center;
+    border-width: 0 1px 0 0;
+    padding: 0 1em 0 1em;
+    height: 100%;
+}
+.home-container26-no-border {
+    display: flex;
+    align-items: center;
+    border-style: hidden;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1em 0 1em;
+    height: 100%;
+}
+
+.home-container27 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-style: hidden;
+}
+
+.home-container28 {
+    display: flex;
+    align-items: flex-start;
+    border-style: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/*the switch css
+!* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #c2d7ec;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #c2d7ec;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

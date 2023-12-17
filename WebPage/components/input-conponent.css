@@ -1,0 +1,110 @@
+.input-conponent-container {
+  width: 100%;
+  height: 692px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: rgb(69, 68, 74);
+  border-width: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-top-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+}
+.input-conponent-form {
+  width: 433px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.input-conponent-container1 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-conponent-text {
+  color: var(--dl-color-gray-white);
+}
+.input-conponent-textinput {
+  width: 50%;
+}
+.input-conponent-container2 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-conponent-text1 {
+  color: var(--dl-color-gray-white);
+}
+.input-conponent-textinput1 {
+  width: 50%;
+}
+.input-conponent-container3 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-conponent-text2 {
+  color: var(--dl-color-gray-white);
+}
+.input-conponent-textinput2 {
+  width: 50%;
+}
+.input-conponent-container4 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-conponent-text3 {
+  color: var(--dl-color-gray-white);
+}
+.input-conponent-textinput3 {
+  width: 50%;
+}
+.input-conponent-container5 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-conponent-text4 {
+  color: var(--dl-color-gray-white);
+}
+.input-conponent-textinput4 {
+  width: 50%;
+}
+.input-conponent-container6 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-conponent-text5 {
+  color: var(--dl-color-gray-white);
+}
+.input-conponent-textinput5 {
+  width: 50%;
+}
+
