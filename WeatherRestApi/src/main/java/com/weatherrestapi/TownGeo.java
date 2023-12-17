@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -14,9 +15,24 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.Properties;
 
 public class TownGeo {
     private TownGeo() {
+    }
+
+    private static Properties properties;
+
+    static {
+        properties = new Properties();
+        try (InputStream input = WeatherDataGateway.class.getClassLoader().getResourceAsStream("config.properties")) {
+            if (input == null) {
+                System.err.println("Sorry, unable to find config.properties");
+            }
+            properties.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     static public HashMap<String, Double> getTownGeo(String townName) throws IllegalArgumentException{
@@ -24,7 +40,7 @@ public class TownGeo {
             throw new IllegalArgumentException("Empty town name");
         }
         String uri = "https://api.openweathermap.org/geo/1.0/direct?q="
-                + townName + "&appid=4da1c26f16a48ca71490132fd31679f8&limit=1";
+                + townName + "&appid=" + properties.getProperty("api_key") + "&limit=1";
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(uri))
