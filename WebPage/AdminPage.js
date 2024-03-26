@@ -7,7 +7,7 @@ document.getElementById("postForm").addEventListener("submit", function (event) 
     formData.append("username", sessionStorage.getItem("username"));
 
     // Send the request using fetch
-    fetch("http://localhost:8080/WeatherRestApi-1.0-SNAPSHOT/api/dbWeather?units=lj", {
+    fetch("http://localhost:8080/WeatherRestApi-1.0-SNAPSHOT/api/dbWeather?units=", {
         method: 'POST',
         body: formData,
         headers: {
@@ -80,14 +80,18 @@ function addInfoToTable(weatherInfo) {
         let tdWindSpeed = document.createElement("td");
         let tdWindDirection = document.createElement("td");
 
+        let date = new Date(weatherInfo[i].date); // Your date object
+        let options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        let formattedDate = date.toLocaleDateString('en-GB', options);
+
         tdName.textContent = weatherInfo[i].username;
         tdCity.textContent = weatherInfo[i].city;
-        tdDate.textContent = weatherInfo[i].date;
+        tdDate.textContent = formattedDate;
         tdTemp.textContent = weatherInfo[i].temperature;
         tdHumidity.textContent = weatherInfo[i].humidity;
         tdClouds.textContent = weatherInfo[i].clouds;
         tdWindSpeed.textContent = weatherInfo[i].windSpeed;
-        tdWindDirection.textContent = weatherInfo[i].windDIr;
+        tdWindDirection.textContent = weatherInfo[i].windDirection;
 
         parentNode.appendChild(tdName);
         parentNode.appendChild(tdCity);

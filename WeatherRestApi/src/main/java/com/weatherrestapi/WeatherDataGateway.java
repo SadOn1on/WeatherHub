@@ -1,111 +1,53 @@
 package com.weatherrestapi;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Properties;
+import java.util.List;
 
-public class WeatherDataGateway implements AutoCloseable{
-    String url;
-    Connection connection;
-
-    private static Properties properties;
-
-    static {
-        properties = new Properties();
-        try (InputStream input = WeatherDataGateway.class.getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
-                System.err.println("Sorry, unable to find config.properties");
-            }
-            properties.load(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public WeatherDataGateway(String url) throws SQLException {
-        this.url = url;
-        connection = DriverManager.getConnection(url, properties);
-    }
-
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
+public class WeatherDataGateway {
 
     public boolean postData(WeatherRecord weatherRecord, String username) {
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users WHERE name=?");
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            Integer userID = rs.getInt(1);
-            stmt = connection.prepareStatement("INSERT INTO weather_data " +
-                    "(city, user_id, date, temperature, humidity, clouds, wind_speed, wind_direction) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        try (EntityManager entityManager = EntityManagerFactoryHolder.getEntityManagerFactory().createEntityManager()) {
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            java.util.Date parsedDate = dateFormat.parse(weatherRecord.getDate());
-            java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+            entityManager.getTransaction().begin();
 
-            stmt.setString(1, weatherRecord.getCity());
-            stmt.setInt(2, userID);
-            stmt.setDate(3, sqlDate);
-            stmt.setDouble(4, weatherRecord.getTemperature());
-            stmt.setDouble(5, weatherRecord.getHumidity());
-            stmt.setString(6, weatherRecord.getClouds());
-            stmt.setDouble(7, weatherRecord.getWindSpeed());
-            stmt.setInt(8, weatherRecord.getWindDirection());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
+            Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.name = :name");
+            query.setParameter("name", username);
+            List<User> users = query.getResultList();
+            User user = users.get(0);
+            user.getWeatherRecords().add(weatherRecord);
+
+            entityManager.persist(user);
+
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
         return true;
     }
 
-    public ArrayList<WeatherRecord> getData(String userName, String city, String date) throws SQLException {
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users WHERE name=?");
-        stmt.setString(1, userName);
-        ResultSet rs = stmt.executeQuery();
-        rs.next();
-        Integer userID = rs.getInt(1);
+    public List<WeatherRecord> getData(String userName, String city, Date date) {
+        try (EntityManager entityManager = EntityManagerFactoryHolder.getEntityManagerFactory().createEntityManager()) {
+            entityManager.getTransaction().begin();
 
-        stmt = connection.prepareStatement("SELECT * FROM weather_data " +
-                "WHERE (userID=? AND date=? AND city=?)");
-        stmt.setInt(1, userID);
-        stmt.setString(2, date);
-        stmt.setString(3, city);
-        rs = stmt.executeQuery();
+            Query query = entityManager.createQuery("SELECT w FROM User u " +
+                    "LEFT JOIN u.weatherRecords w " +
+                    "WHERE u.name = :userName AND w.city = :city AND w.date = :date", WeatherRecord.class);
+            query.setParameter("userName", userName);
+            query.setParameter("city", city);
+            query.setParameter("date", date);
+            List<WeatherRecord> result = query.getResultList();
 
-        ArrayList<WeatherRecord> result = new ArrayList<>();
-        WeatherRecord record = new WeatherRecord();
-        while (rs.next()) {
-            record.setUserID(userID);
-            record.setCity(city);
-            record.setDate(date);
-            record.setTemperature(rs.getDouble(5));
-            record.setHumidity(rs.getDouble(6));
-            record.setClouds(rs.getString(7));
-            record.setWindSpeed(rs.getDouble(8));
-            record.setWindDirection(rs.getInt(9));
+            entityManager.getTransaction().commit();
 
-            result.add(record);
+            return result;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        return result;
+        return new ArrayList<>();
     }
 
-    @Override
-    public void close() throws Exception {
-        connection.close();
-    }
 }

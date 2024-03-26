@@ -2,14 +2,20 @@ package com.weatherrestapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.persistence.*;
 
+import java.sql.Date;
+
+@Entity
+@Table(name="weather_record")
 public class WeatherRecord {
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    int id;
     String city;
-    String date;
+    Date date;
     Double temperature;
     Double humidity;
-    Integer userID;
-    String userName;
     Integer windDirection;
     String clouds;
     Double windSpeed;
@@ -17,26 +23,12 @@ public class WeatherRecord {
     public WeatherRecord() {
     }
 
-    public WeatherRecord(String city, String date, Double temperature, Double humidity, String userName,
+    public WeatherRecord(String city, Date date, Double temperature, Double humidity,
                          Integer windDirection, String clouds, Double windSpeed) {
         this.city = city;
         this.date = date;
         this.temperature = temperature;
         this.humidity = humidity;
-        this.userName = userName;
-        this.windDirection = windDirection;
-        this.clouds = clouds;
-        this.windSpeed = windSpeed;
-    }
-
-    public WeatherRecord(String city, String date, Double temperature, Double humidity, Integer userID,
-                         String userName, Integer windDirection, String clouds, Double windSpeed) {
-        this.city = city;
-        this.date = date;
-        this.temperature = temperature;
-        this.humidity = humidity;
-        this.userID = userID;
-        this.userName = userName;
         this.windDirection = windDirection;
         this.clouds = clouds;
         this.windSpeed = windSpeed;
@@ -50,11 +42,11 @@ public class WeatherRecord {
         this.city = city;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -72,22 +64,6 @@ public class WeatherRecord {
 
     public void setHumidity(Double humidity) {
         this.humidity = humidity;
-    }
-
-    public Integer getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public Integer getWindDirection() {

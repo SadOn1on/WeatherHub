@@ -4,7 +4,6 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Response;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +14,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 @Path("/realWeather")
@@ -41,7 +40,7 @@ public class ForecastResource {
     public String getCurrentWeather(@QueryParam("units") String units,
                         @QueryParam("cityName") String cityName) {
         try {
-        HashMap<String, Double> citiesGeo = TownGeo.getTownGeo(cityName);
+        Map<String, Double> citiesGeo = TownGeo.getTownGeo(cityName);
         String lat = citiesGeo.get("lat").toString();
         String lon = citiesGeo.get("lon").toString();
         String uri = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat +
@@ -70,7 +69,7 @@ public class ForecastResource {
     public String getForecast(@QueryParam("units") String units,
                                       @QueryParam("cityName") String cityName) {
         try {
-        HashMap<String, Double> citiesGeo = TownGeo.getTownGeo(cityName);
+        Map<String, Double> citiesGeo = TownGeo.getTownGeo(cityName);
         String lat = citiesGeo.get("lat").toString();
         String lon = citiesGeo.get("lon").toString();
         String uri = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat +

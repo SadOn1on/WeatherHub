@@ -1,7 +1,5 @@
 package com.weatherrestapi;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,6 +13,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class TownGeo {
@@ -35,7 +34,7 @@ public class TownGeo {
         }
     }
 
-    static public HashMap<String, Double> getTownGeo(String townName) throws IllegalArgumentException{
+    public static Map<String, Double> getTownGeo(String townName) throws IllegalArgumentException{
         if (townName.length() == 0) {
             throw new IllegalArgumentException("Empty town name");
         }

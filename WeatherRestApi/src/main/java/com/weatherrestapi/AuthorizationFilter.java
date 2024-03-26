@@ -9,7 +9,6 @@ import jakarta.ws.rs.Priorities;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.core.HttpHeaders;
-import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
@@ -25,17 +24,14 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        String authorizationHeader =
-                requestContext.getHeaderString("authentication");
-        MultivaluedHashMap<String, String> headers = new MultivaluedHashMap<>(requestContext.getHeaders());
+        String authorizationHeader = requestContext.getHeaderString("authentication");
 
         if (!isTokenBasedAuthentication(authorizationHeader)) {
             abortWithUnauthorized(requestContext);
             return;
         }
 
-        String token = authorizationHeader
-                .substring(AUTHENTICATION_SCHEME.length()).trim();
+        String token = authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
 
         try {
             validateToken(token);

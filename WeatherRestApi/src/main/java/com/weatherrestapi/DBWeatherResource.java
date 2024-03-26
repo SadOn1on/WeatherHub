@@ -2,13 +2,12 @@ package com.weatherrestapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Path("/dbWeather")
 public class DBWeatherResource {
@@ -23,17 +22,19 @@ public class DBWeatherResource {
                                     @FormParam("windDir") Integer windDir,
                                     @FormParam("username") String username,
                                     @FormParam("units") String units) {
-        try (WeatherDataGateway weatherDataGateway = new WeatherDataGateway("jdbc:postgresql:Weather_app")) {
+        try {
+            WeatherDataGateway weatherDataGateway = new WeatherDataGateway();
             if (units.equals("imperial")) {
                 temperature = ConverterClass.fahrenheitToCelsius(temperature);
                 windSpeed = ConverterClass.mphToMs(windSpeed);
             }
-            WeatherRecord weatherRecord = new WeatherRecord(city, date, temperature, humidity, username, windDir,
+
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            java.sql.Date sqlDate = new java.sql.Date(format.parse(date).getTime());
+
+            WeatherRecord weatherRecord = new WeatherRecord(city, sqlDate, temperature, humidity, windDir,
                     clouds, windSpeed);
             weatherDataGateway.postData(weatherRecord, username);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return Response.ok(e.getMessage()).build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return Response.ok(e.getMessage()).build();
@@ -51,17 +52,23 @@ public class DBWeatherResource {
                                    @QueryParam("units") String units) {
 
 
-        try (WeatherDataGateway weatherDataGateway = new WeatherDataGateway("jdbc:postgresql:Weather_app")) {
-            ArrayList<WeatherRecord> records = weatherDataGateway.getData(username, cityName, date);
+        try {
+            WeatherDataGateway weatherDataGateway = new WeatherDataGateway();
+
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            java.sql.Date sqlDate = new java.sql.Date(format.parse(date).getTime());
+
+            List<WeatherRecord> records = weatherDataGateway.getData(username, cityName, sqlDate);
             ObjectMapper objectMapper = new ObjectMapper();
             ArrayNode result = objectMapper.createArrayNode();
             for (WeatherRecord i : records) {
+                if (units.equals("imperial")) {
+                    i.setTemperature(ConverterClass.celsiusToFahrenheit(i.getTemperature()));
+                    i.setWindSpeed(ConverterClass.msToMph(i.getWindSpeed()));
+                }
                 result.add(i.toJSONNode());
             }
             return result.toString();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return "error";
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return "error";

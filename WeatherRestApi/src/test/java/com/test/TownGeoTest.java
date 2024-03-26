@@ -4,6 +4,7 @@ import com.weatherrestapi.TownGeo;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,13 +20,13 @@ public class TownGeoTest {
     public void testGetTownGeo() {
         // Test case for Minsk
         String minsk = "Minsk";
-        HashMap<String, Double> minskCoords = TownGeo.getTownGeo(minsk);
+        Map<String, Double> minskCoords = TownGeo.getTownGeo(minsk);
         assertEquals(minskExpectedLat, minskCoords.get("lat"), 0.0001);
         assertEquals(minskExpectedLon, minskCoords.get("lon"), 0.0001);
 
         // Test case for London
         String london = "London";
-        HashMap<String, Double> londonCoords = TownGeo.getTownGeo(london);
+        Map<String, Double> londonCoords = TownGeo.getTownGeo(london);
         assertEquals(londonExpectedLat, londonCoords.get("lat"), 0.0001);
         assertEquals(londonExpectedLon, londonCoords.get("lon"), 0.0001);
     }
