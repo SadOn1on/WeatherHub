@@ -13,6 +13,8 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 @Secured
 @Provider
@@ -21,6 +23,20 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     private static final String REALM = "example";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
+
+    private static Properties properties;
+
+    static {
+        properties = new Properties();
+        try (InputStream input = WeatherDataGateway.class.getClassLoader().getResourceAsStream("config.properties")) {
+            if (input == null) {
+                System.err.println("Sorry, unable to find config.properties");
+            }
+            properties.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -58,7 +74,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         Jws<Claims> jws;
         try {
             jws = Jwts.parserBuilder()
-                    .setSigningKey("afasfasdfasfdasdfasdfasdfasdfafasfasdfasfdasdfasdfasdfasdfafasfa")
+                    .setSigningKey(properties.getProperty("sign_key"))
                     .build()
                     .parseClaimsJws(token);
             if (!jws.getBody().get("roles").equals("admin")) {
