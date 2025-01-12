@@ -1,6 +1,6 @@
 # WeatherHub
 
-WeatherHub is a comprehensive weather forecast web application designed for all users. Registered users can save and access personalized weather data in the database, while non-registered users can still explore weather forecasts without creating an account.
+WeatherHub is a comprehensive weather forecast web application. Registered users can save and access personalized weather data in the database, while non-registered users can still explore weather forecasts without creating an account.
 
 ## Features
 - **Comprehensive Weather Forecasts:** Provides detailed weather information for all users allowing them choose location and units.
