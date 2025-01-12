@@ -1,5 +1,8 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.repository;
 
+import by.zharski.weatherrestapi.entity.User;
+import by.zharski.weatherrestapi.entity.WeatherRecord;
+import by.zharski.weatherrestapi.utill.EntityManagerFactoryHolder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -7,7 +10,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherDataGateway {
+public class WeatherRepository {
 
     public boolean postData(WeatherRecord weatherRecord, String username) {
         try (EntityManager entityManager = EntityManagerFactoryHolder.getEntityManagerFactory().createEntityManager()) {

@@ -1,9 +1,9 @@
-package com.test;
+package by.zharski.weatherrestapi.test.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.weatherrestapi.ForecastResource;
+import by.zharski.weatherrestapi.controller.ForecastController;
 import jakarta.ws.rs.core.Application;
 import jakarta.ws.rs.core.Response;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ForecastResourceTest extends JerseyTest {
+public class ForecastControllerTest extends JerseyTest {
     @Override
     protected Application configure() {
-        return new ResourceConfig(ForecastResource.class);
+        return new ResourceConfig(ForecastController.class);
     }
 
     @Test

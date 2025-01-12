@@ -1,4 +1,4 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;

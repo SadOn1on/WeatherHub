@@ -1,6 +1,6 @@
-package com.test;
+package by.zharski.weatherrestapi.test.controller;
 
-import com.weatherrestapi.AuthResource;
+import by.zharski.weatherrestapi.controller.AuthController;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AuthResourceTest extends JerseyTest {
+public class AuthControllerTest extends JerseyTest {
 
     @Override
     protected Application configure() {
-        return new ResourceConfig(AuthResource.class);
+        return new ResourceConfig(AuthController.class);
     }
 
     @Test

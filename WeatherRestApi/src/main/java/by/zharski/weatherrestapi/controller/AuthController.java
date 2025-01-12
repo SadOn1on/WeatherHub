@@ -1,5 +1,7 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.controller;
 
+import by.zharski.weatherrestapi.repository.LoginRepository;
+import by.zharski.weatherrestapi.repository.WeatherRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.ws.rs.FormParam;
@@ -16,13 +18,13 @@ import java.util.Date;
 import java.util.Properties;
 
 @Path("/auth")
-public class AuthResource {
+public class AuthController {
 
     private static Properties properties;
 
     static {
         properties = new Properties();
-        try (InputStream input = WeatherDataGateway.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = WeatherRepository.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
                 System.err.println("Sorry, unable to find config.properties");
             }
@@ -39,8 +41,8 @@ public class AuthResource {
                           @FormParam("password") String password) {
 
         try {
-            LoginDataGateway loginDataGateway = new LoginDataGateway();
-            if (!loginDataGateway.checkAuth(username, password.getBytes())) {
+            LoginRepository loginRepository = new LoginRepository();
+            if (!loginRepository.checkAuth(username, password.getBytes())) {
                 throw new SQLException("no such user");
             }
         } catch (Exception e) {

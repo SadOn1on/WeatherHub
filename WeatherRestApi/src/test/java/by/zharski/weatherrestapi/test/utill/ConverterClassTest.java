@@ -1,6 +1,6 @@
-package com.test;
+package by.zharski.weatherrestapi.test.utill;
 
-import com.weatherrestapi.ConverterClass;
+import by.zharski.weatherrestapi.utill.ConverterClass;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

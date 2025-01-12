@@ -1,5 +1,7 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.repository;
 
+import by.zharski.weatherrestapi.entity.User;
+import by.zharski.weatherrestapi.utill.EntityManagerFactoryHolder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -9,7 +11,7 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
-public class LoginDataGateway {
+public class LoginRepository {
 
     public boolean checkAuth(String username, byte[] password) {
         try (EntityManager entityManager = EntityManagerFactoryHolder.getEntityManagerFactory().createEntityManager()) {

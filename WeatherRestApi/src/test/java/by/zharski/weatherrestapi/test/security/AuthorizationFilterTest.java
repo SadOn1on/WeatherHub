@@ -1,6 +1,6 @@
-package com.test;
+package by.zharski.weatherrestapi.test.security;
 
-import com.weatherrestapi.AuthorizationFilter;
+import by.zharski.weatherrestapi.security.AuthorizationFilter;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.ws.rs.container.ContainerRequestContext;

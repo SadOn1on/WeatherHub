@@ -1,6 +1,6 @@
-package com.test;
+package by.zharski.weatherrestapi.test.repository;
 
-import com.weatherrestapi.DBWeatherResource;
+import by.zharski.weatherrestapi.controller.DBWeatherController;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.ws.rs.client.Entity;
@@ -15,10 +15,10 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class DBWeatherReosurceTest extends JerseyTest {
+public class WeatherRepositoryTest extends JerseyTest {
     @Override
     protected Application configure() {
-        return new ResourceConfig(DBWeatherResource.class);
+        return new ResourceConfig(DBWeatherController.class);
     }
 
     private static final String TOKEN_SECRET = "afasfasdfasfdasdfasdfasdfasdfafasfasdfasfdasdfasdfasdfasdfafasfa";

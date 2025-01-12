@@ -1,4 +1,4 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.entity;
 
 import jakarta.persistence.*;
 

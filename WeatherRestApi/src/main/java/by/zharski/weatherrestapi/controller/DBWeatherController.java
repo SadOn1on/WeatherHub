@@ -1,7 +1,11 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import by.zharski.weatherrestapi.utill.ConverterClass;
+import by.zharski.weatherrestapi.security.Secured;
+import by.zharski.weatherrestapi.repository.WeatherRepository;
+import by.zharski.weatherrestapi.entity.WeatherRecord;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
@@ -10,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Path("/dbWeather")
-public class DBWeatherResource {
+public class DBWeatherController {
     @Secured
     @POST
     public Response postWeatherToDB(@FormParam("city") String city,
@@ -23,7 +27,7 @@ public class DBWeatherResource {
                                     @FormParam("username") String username,
                                     @FormParam("units") String units) {
         try {
-            WeatherDataGateway weatherDataGateway = new WeatherDataGateway();
+            WeatherRepository weatherRepository = new WeatherRepository();
             if (units.equals("imperial")) {
                 temperature = ConverterClass.fahrenheitToCelsius(temperature);
                 windSpeed = ConverterClass.mphToMs(windSpeed);
@@ -34,7 +38,7 @@ public class DBWeatherResource {
 
             WeatherRecord weatherRecord = new WeatherRecord(city, sqlDate, temperature, humidity, windDir,
                     clouds, windSpeed);
-            weatherDataGateway.postData(weatherRecord, username);
+            weatherRepository.postData(weatherRecord, username);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return Response.ok(e.getMessage()).build();
@@ -53,12 +57,12 @@ public class DBWeatherResource {
 
 
         try {
-            WeatherDataGateway weatherDataGateway = new WeatherDataGateway();
+            WeatherRepository weatherRepository = new WeatherRepository();
 
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             java.sql.Date sqlDate = new java.sql.Date(format.parse(date).getTime());
 
-            List<WeatherRecord> records = weatherDataGateway.getData(username, cityName, sqlDate);
+            List<WeatherRecord> records = weatherRepository.getData(username, cityName, sqlDate);
             ObjectMapper objectMapper = new ObjectMapper();
             ArrayNode result = objectMapper.createArrayNode();
             for (WeatherRecord i : records) {

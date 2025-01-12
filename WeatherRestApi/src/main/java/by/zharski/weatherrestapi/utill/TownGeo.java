@@ -1,7 +1,8 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.utill;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import by.zharski.weatherrestapi.repository.WeatherRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ public class TownGeo {
 
     static {
         properties = new Properties();
-        try (InputStream input = WeatherDataGateway.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = WeatherRepository.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
                 System.err.println("Sorry, unable to find config.properties");
             }

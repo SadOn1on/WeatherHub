@@ -1,9 +1,8 @@
-package com.test;
+package by.zharski.weatherrestapi.test.utill;
 
-import com.weatherrestapi.TownGeo;
+import by.zharski.weatherrestapi.utill.TownGeo;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,13 +17,11 @@ public class TownGeoTest {
 
     @Test
     public void testGetTownGeo() {
-        // Test case for Minsk
         String minsk = "Minsk";
         Map<String, Double> minskCoords = TownGeo.getTownGeo(minsk);
         assertEquals(minskExpectedLat, minskCoords.get("lat"), 0.0001);
         assertEquals(minskExpectedLon, minskCoords.get("lon"), 0.0001);
 
-        // Test case for London
         String london = "London";
         Map<String, Double> londonCoords = TownGeo.getTownGeo(london);
         assertEquals(londonExpectedLat, londonCoords.get("lat"), 0.0001);
@@ -33,7 +30,6 @@ public class TownGeoTest {
 
     @Test
     public void testGetTownGeoInvalidTown() {
-        // Test case for an invalid town name
         String invalidTown = "InvalidTown";
         Exception thrown = assertThrows(IllegalArgumentException.class,
                 () -> TownGeo.getTownGeo(invalidTown)

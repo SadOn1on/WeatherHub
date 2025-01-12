@@ -1,5 +1,7 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.controller;
 
+import by.zharski.weatherrestapi.utill.TownGeo;
+import by.zharski.weatherrestapi.repository.WeatherRepository;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -18,13 +20,13 @@ import java.util.Map;
 import java.util.Properties;
 
 @Path("/realWeather")
-public class ForecastResource {
+public class ForecastController {
 
     private static Properties properties;
 
     static {
         properties = new Properties();
-        try (InputStream input = WeatherDataGateway.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = WeatherRepository.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
                 System.err.println("Sorry, unable to find config.properties");
             }

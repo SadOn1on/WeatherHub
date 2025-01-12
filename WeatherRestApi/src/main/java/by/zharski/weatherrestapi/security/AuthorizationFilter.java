@@ -1,5 +1,6 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.security;
 
+import by.zharski.weatherrestapi.repository.WeatherRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -28,7 +29,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     static {
         properties = new Properties();
-        try (InputStream input = WeatherDataGateway.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = WeatherRepository.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
                 System.err.println("Sorry, unable to find config.properties");
             }

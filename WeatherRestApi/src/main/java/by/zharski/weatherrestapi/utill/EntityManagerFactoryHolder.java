@@ -1,9 +1,9 @@
-package com.weatherrestapi;
+package by.zharski.weatherrestapi.utill;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class EntityManagerFactoryHolder {
+public class EntityManagerFactoryHolder {
     private static EntityManagerFactory entityManagerFactory =
             Persistence.createEntityManagerFactory("WeatherAPI");
 

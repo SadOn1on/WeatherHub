@@ -8,8 +8,8 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>com.weatherrestapi.User</class>
-        <class>com.weatherrestapi.WeatherRecord</class>
+        <class>by.zharski.weatherrestapi.entity.User</class>
+        <class>by.zharski.weatherrestapi.entity.WeatherRecord</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value=""/>
